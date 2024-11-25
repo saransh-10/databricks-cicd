@@ -2,22 +2,25 @@
 name: dev Workflow
 # Workflow trigger
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy from'
+  workflow_call:
+    secrets:
+      Azure_Credential:
         required: true
-        default: 'main'
+    inputs:
+      environment:
+        required: true
+        type: string
 jobs:
-  databricks-dev:
-    name: databricks dev
+  db-notebook-deploy:
+    name: databricks notebook deploy
     runs-on: ubuntu-latest
     environment:
-      name: dev
+      name: ${{ inputs.environment }}
     steps:
       # Checkout the repository
       - name: Checkout
         uses: "actions/checkout@v4"
+      # install databricks-cli
       - name: install-databricks-cli
         uses: microsoft/install-databricks-cli@v1.0.0
       # notebook deployment
