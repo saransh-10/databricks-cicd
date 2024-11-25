@@ -2,9 +2,6 @@
 name: dev Workflow
 # Workflow trigger
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       branch:
