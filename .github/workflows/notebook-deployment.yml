@@ -1,0 +1,33 @@
+# Notebook deployment workflow
+name: dev Workflow
+# Workflow trigger
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Deployment/transit.tfvars'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'main'
+jobs:
+  databricks-dev:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    steps:
+      # Checkout the repository
+      - name: Checkout
+        uses: "actions/checkout@v4"
+      # notebook deployment
+      - name: Deploy Notebooks
+        uses: databricks/databricks-actions@v1
+        with:
+          host: ${{ secrets.DATABRICKS_HOST }}
+          token: ${{ secrets.DATABRICKS_TOKEN }}
+          path: /Workspace/Notebooks/databricks-cicd
+          local-path: ${{ github.workspace }}/databricks-cicd
