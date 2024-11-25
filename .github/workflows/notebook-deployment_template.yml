@@ -3,6 +3,11 @@ name: dev Workflow
 # Workflow trigger
 on:
   workflow_call:
+    secrets:
+      DATABRICKS_TOKEN:
+        required: true
+      DATABRICKS_HOST:
+        required: true
     inputs:
       environment:
         required: true
