@@ -30,4 +30,4 @@ jobs:
           databricks-host: ${{ secrets.DATABRICKS_HOST }}
           databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
           remote-path: /Workspace/Notebooks/databricks-cicd
-          local-path: ${{ github.workspace }}/databricks-cicd
+          local-path: ${{ github.workspace }}
