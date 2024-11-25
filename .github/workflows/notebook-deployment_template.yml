@@ -3,9 +3,6 @@ name: dev Workflow
 # Workflow trigger
 on:
   workflow_call:
-    secrets:
-      Azure_Credential:
-        required: true
     inputs:
       environment:
         required: true
