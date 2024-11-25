@@ -17,7 +17,7 @@ jobs:
     uses: saransh-10/databricks-cicd/.github/workflows/notebook-deployment_template.yml@main
     with:
       environment: dev
-      secrets: inherit
+    secrets: inherit
   uat-notebook-deploy:
     name: uat databricks notebooks deploy
     needs: [dev-notebook-deploy]
