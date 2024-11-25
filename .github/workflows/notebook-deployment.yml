@@ -29,5 +29,5 @@ jobs:
         with:
           databricks-host: ${{ secrets.DATABRICKS_HOST }}
           databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
-          remote-path: /Workspace/Notebooks/databricks-cicd
+          remote-path: /Workspace/Notebooks
           local-path: ${{ github.workspace }}/notebook
