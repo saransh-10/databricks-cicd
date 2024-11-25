@@ -1,0 +1,34 @@
+# Notebook deployment workflow
+name: Notebook deployment Workflow
+# Workflow trigger
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'main'
+jobs:
+  dev-notebook-deploy:
+    name: dev databricks notebooks deploy
+    uses: saransh-10/databricks-cicd/.github/workflows/notebook-deployment_template.yml@main
+    with:
+      environment: dev
+      secrets: inherit
+  uat-notebook-deploy:
+    name: uat databricks notebooks deploy
+    needs: [dev-notebook-deploy]
+    uses: saransh-10/databricks-cicd/.github/workflows/notebook-deployment_template.yml@main
+    with:
+      environment: uat
+    secrets: inherit
+  prod-notebook-deploy:
+    name: prod databricks notebooks deploy
+    needs: [uat-notebook-deploy]
+    uses: saransh-10/databricks-cicd/.github/workflows/notebook-deployment_template.yml@main
+    with:
+      environment: prod
+    secrets: inherit
